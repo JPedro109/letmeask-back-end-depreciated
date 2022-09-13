@@ -1,0 +1,9 @@
+{
+  "name": "letmeask-backend",
+  "version": "1.0.0",
+  "description": "Api do letmeask",
+  "main": "dist/server.js",
+  "repository": "https://github.com/JPedro109/letmeask-back-end",
+  "author": "João Pedro",
+  "license": "MIT"
+}
