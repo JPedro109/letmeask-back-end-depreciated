@@ -5,5 +5,9 @@
   "main": "dist/server.js",
   "repository": "https://github.com/JPedro109/letmeask-back-end",
   "author": "João Pedro",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.8.3"
+  }
 }
