@@ -1,19 +1,24 @@
 {
-  "name": "letmeask-backend",
-  "version": "1.0.0",
-  "description": "Api do letmeask",
-  "main": "dist/server.js",
-  "repository": "https://github.com/JPedro109/letmeask-back-end",
-  "author": "João Pedro",
-  "license": "MIT",
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.37.0",
-    "@typescript-eslint/parser": "^5.37.0",
-    "eslint": "^8.23.1",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^4.8.3"
-  },
-  "dependencies": {
-    "@jpmnsdeveloper/toolkit": "^1.0.0"
-  }
+	"name": "letmeask-backend",
+	"version": "1.0.0",
+	"description": "Api do letmeask",
+	"main": "dist/server.js",
+	"repository": "https://github.com/JPedro109/letmeask-back-end",
+	"author": "João Pedro",
+	"license": "MIT",
+	"scripts": {
+		"dev": "ts-node-dev src/index.ts"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^5.37.0",
+		"@typescript-eslint/parser": "^5.37.0",
+		"eslint": "^8.23.1",
+		"ts-node-dev": "^2.0.0",
+		"typescript": "^4.8.3"
+	},
+	"dependencies": {
+		"@jpmnsdeveloper/toolkit": "^1.0.0",
+		"@prisma/client": "^4.3.1",
+		"prisma": "^4.3.1"
+	}
 }
