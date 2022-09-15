@@ -1,0 +1,46 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model user {
+    id                             String     @id
+    email                          String     @unique
+    name                           String
+    password                       String
+    verified_email                 Boolean?
+    verification_token             String
+    verification_token_expiry_time BigInt?    @default(0)
+    admin                          String?
+    created_at                     DateTime?  @default(now())
+    updated_at                     DateTime?  @default(now())
+    room                           room?
+    question                       question[]
+}
+
+model room {
+    id         String     @id
+    user_id    String     @unique
+    code       String     @unique
+    name       String
+    created_at DateTime   @default(now())
+    updated_at DateTime   @default(now())
+    question   question[]
+    user       user       @relation(fields: [user_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+}
+
+model question {
+    id         String   @id
+    user_id    String
+    room_code  String   @unique
+    name       String
+    created_at DateTime @default(now())
+    updated_at DateTime @default(now())
+    response   String?
+    user       user     @relation(fields: [user_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+    room       room     @relation(fields: [room_code], references: [code], onUpdate: Cascade, onDelete: Cascade)
+}
