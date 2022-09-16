@@ -19,8 +19,8 @@ export class DBAdapter<Type> implements IDBAdapter<Type> {
 		return await this.prisma[this.table].findUnique({ where: data });
 	}
 
-	async getAll(): Promise<Type[]> {
-		return await this.prisma[this.table].findMany();
+	async getAll(where?: object): Promise<Type[]> {
+		return await this.prisma[this.table].findMany({ where: where || {} });
 	}
 
 	async update(where: object, data: object): Promise<Type> {
@@ -29,5 +29,9 @@ export class DBAdapter<Type> implements IDBAdapter<Type> {
 
 	async delete(where: object): Promise<Type> {
 		return await this.prisma[this.table].delete({ where });
+	}
+
+	async deleteMany(where?: object): Promise<Type> {
+		return await this.prisma[this.table].delete({ where: where || {} });
 	}
 }
