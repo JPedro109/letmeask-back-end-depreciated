@@ -20,6 +20,7 @@ model user {
     updated_at                     DateTime?  @default(now())
     room                           room?
     question                       question[]
+    response                       response[]
 }
 
 model room {
@@ -34,13 +35,23 @@ model room {
 }
 
 model question {
-    id         String   @id
+    id         String    @id
     user_id    String
-    room_code  String   @unique
+    room_code  String    @unique
     name       String
-    created_at DateTime @default(now())
-    updated_at DateTime @default(now())
-    response   String?
-    user       user     @relation(fields: [user_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
-    room       room     @relation(fields: [room_code], references: [code], onUpdate: Cascade, onDelete: Cascade)
+    created_at DateTime  @default(now())
+    updated_at DateTime  @default(now())
+    response   response?
+    user       user      @relation(fields: [user_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+    room       room      @relation(fields: [room_code], references: [code], onUpdate: Cascade, onDelete: Cascade)
+}
+
+model response {
+    id          String   @id
+    user_id     String
+    question_id String   @unique
+    response    String
+    created_at  DateTime @default(now())
+    user        user     @relation(fields: [user_id], references: [id])
+    question    question @relation(fields: [question_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
 }
