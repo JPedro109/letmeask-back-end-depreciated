@@ -7,6 +7,7 @@ export interface IUserRepository {
 	findEmailByEmail(email: string): Promise<string>;
 	findByEmailVerified(email: string): Promise<string>
 	getId(email: string): Promise<string>;
+	getName(ud: string): Promise<string>;
 	getPasswordByEmail(email: string): Promise<string>;
 	getPasswordById(id: string): Promise<string>;
 	getVerificationTokenById(id: string): Promise<string>;

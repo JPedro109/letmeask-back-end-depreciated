@@ -58,6 +58,12 @@ export class UserRepository implements IUserRepository {
 		return data?.id;
 	}
 
+	async getName(id: string): Promise<string> {
+		const data = await this.adapter.getOne({ id });
+
+		return data?.name;
+	}
+
 	async getPasswordByEmail(email: string): Promise<string> {
 		const data = await this.adapter.getOne({ email });
 
