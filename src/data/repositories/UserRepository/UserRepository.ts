@@ -16,10 +16,10 @@ export class UserRepository implements IUserRepository {
 		});
 	}
 
-	async verifyEmail(email: string, token: string): Promise<void> {
+	async verifyEmail(email: string): Promise<void> {
 		await this.adapter.update(
-			{ email, verification_token: token },
-			{ email_verified: true }
+			{ email },
+			{ verified_email: true }
 		);
 	}
 
@@ -41,13 +41,13 @@ export class UserRepository implements IUserRepository {
 	}
 
 	async findEmailByEmail(email: string): Promise<string> {
-		const data = await this.adapter.getOne({ email, email_verified: true });
+		const data = await this.adapter.getOne({ email, verified_email: true }, "AND");
 
 		return data?.email;
 	}
 
 	async findByEmailVerified(email: string): Promise<string> {
-		const data = await this.adapter.getOne({ email });
+		const data = await this.adapter.getOne({ email, verified_email: true }, "AND");
 
 		return data?.email;
 	}

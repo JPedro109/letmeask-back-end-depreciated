@@ -1,6 +1,6 @@
 export interface IUserRepository {
 	store(id: string, email: string, name: string, hashPassword: string, token: string): Promise<void>;
-	verifyEmail(email: string, token: string): Promise<void>;
+	verifyEmail(email: string): Promise<void>;
 	updateName(id: string, name: string): Promise<void>;
 	destroy(id: string): Promise<void>;
 	findEmailById(id: string): Promise<string>;
