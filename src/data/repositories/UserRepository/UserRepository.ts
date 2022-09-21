@@ -73,7 +73,7 @@ export class UserRepository implements IUserRepository {
 	async getPasswordById(id: string): Promise<string> {
 		const data = await this.adapter.getOne({ id });
 
-		return data?.id;
+		return data?.password;
 	}
 
 	async getVerificationTokenById(id: string): Promise<string> {
