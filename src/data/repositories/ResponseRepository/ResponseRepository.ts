@@ -13,4 +13,8 @@ export class ResponseRepository implements IResponseRepository {
 			response
 		});
 	}
+
+	async getResponse(questionId: string): Promise<Response> {
+		return await this.adapter.getOne({ question_id: questionId });
+	}
 }
