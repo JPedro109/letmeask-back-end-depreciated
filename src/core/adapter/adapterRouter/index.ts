@@ -16,11 +16,11 @@ export const adapterRouter = (router: (request: IRequestRouters) => Promise<IRes
 
 			return res.status(statusCode).json({ response });
 		} catch (e) {
-			const message = e?.message || "Internal Server Error";
+			const message = e?.message;
 			const statusCode = e?.statusCode || 500;
 
 			console.error(message);
-			return res.status(statusCode).json({ message });
+			return res.status(statusCode).json({ message: statusCode !== 500 ? message : "Internal Server Error" });
 		}
 	};
 };
