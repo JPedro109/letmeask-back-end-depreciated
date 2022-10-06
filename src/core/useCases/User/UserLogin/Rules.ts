@@ -1,4 +1,3 @@
-import { SECRET_KEY_JWT } from "../../../../config";
 import { MissingParamError, UnauthorizedError } from "../../../../utils/error";
 import { IUserRepository } from "../../../../data/repositories/UserRepository/IUserRepository";
 import { toolkit } from "../../../../utils/toolkit";
@@ -27,8 +26,8 @@ export class Rules {
 
 		const id = await this.repository.getId(email);
 
-		const accessToken = toolkit.jsonWebToken.createToken({ id, email }, SECRET_KEY_JWT, 3600);
-		const refreshToken = toolkit.jsonWebToken.createToken({ id, refreshToken: true }, SECRET_KEY_JWT, 84600);
+		const accessToken = toolkit.jsonWebToken.createToken({ id, email }, 3600);
+		const refreshToken = toolkit.jsonWebToken.createToken({ id, refreshToken: true }, 84600);
 
 		return {
 			accessToken,
