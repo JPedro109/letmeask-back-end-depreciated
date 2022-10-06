@@ -1,5 +1,6 @@
 import { toolkit } from "./utils/toolkit";
 
+export const ENVIRONMENT = toolkit.environment.getValue("ENVIRONMENT");
 export const APP_URL = toolkit.environment.getRequiredValue("APP_URL");
 export const API_URL = toolkit.environment.getRequiredValue("API_URL");
 export const EMAIL_ORIGIN = toolkit.environment.getRequiredValue("EMAIL_ORIGIN");
