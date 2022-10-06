@@ -1,4 +1,4 @@
-import { APP_URL } from "../../config";
+import { APP_URL, API_URL } from "../../config";
 import { UnauthorizedError } from "../../utils/error";
 import corsLib from "cors";
 
@@ -8,6 +8,7 @@ const corsOptions = {
 	origin: (origin: any, callback: any) => {
 
 		if (APP_URL.indexOf(origin) !== -1) return callback(null, true);
+		if (API_URL.indexOf(origin) !== -1) return callback(null, true);
 
 		callback(new UnauthorizedError("O cors não permite essa requisição"));
 
