@@ -4,6 +4,8 @@ WORKDIR /api-letmeask
 
 COPY package.json .
 
+COPY prisma .
+
 RUN yarn install
 
 COPY . .
