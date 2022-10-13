@@ -1,4 +1,4 @@
-import { APP_URL, EMAIL_ORIGIN } from "../../../../config";
+import { APP_URL } from "../../../../config";
 import { InvalidParamError, MissingParamError, PasswordInvalidError } from "../../../../utils/error";
 import { IUserRepository } from "../../../../data/repositories/UserRepository/IUserRepository";
 import { toolkit } from "../../../../utils/toolkit";
@@ -28,7 +28,7 @@ export class Rules {
 
 		await this.repository.store(id, email, name, hashPassword, token);
 
-		await toolkit.email.sendMail(EMAIL_ORIGIN, email, "Validação de Email", "createUser", {
+		await toolkit.email.sendMail(email, "Validação de Email", "createUser", {
 			appUrl: APP_URL,
 			email: email,
 			token: token

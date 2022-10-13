@@ -1,4 +1,4 @@
-import { APP_URL, EMAIL_ORIGIN, TOKEN_EXPIRY_TIME } from "../../../../config";
+import { APP_URL, TOKEN_EXPIRY_TIME } from "../../../../config";
 import { InvalidParamError, MissingParamError } from "../../../../utils/error";
 import { IUserRepository } from "../../../../data/repositories/UserRepository/IUserRepository";
 import { toolkit } from "../../../../utils/toolkit";
@@ -21,7 +21,7 @@ export class Rules {
 		await this.repository.updateVerificationTokenById(userId, token);
 		await this.repository.updateVerificationTokenExpiryDateById(userId, tokenExpirationTime);
 
-		await toolkit.email.sendMail(EMAIL_ORIGIN, email, "Atualização de Email", "updateUser", {
+		await toolkit.email.sendMail(email, "Atualização de Email", "updateUser", {
 			appUrl: APP_URL,
 			email: email,
 			token: token
