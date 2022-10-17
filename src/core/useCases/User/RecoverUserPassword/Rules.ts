@@ -36,6 +36,6 @@ export class Rules {
 
 		await this.repository.updateVerificationTokenExpiryDateByEmail(email, 0);
 
-		return "Senha atualizada com sucesso";
+		return email;
 	}
 }
