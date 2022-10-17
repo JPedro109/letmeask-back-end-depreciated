@@ -28,7 +28,7 @@ export class Rules {
 			token: token
 		});
 
-		return "O link de recuperação de senha foi enviado para seu email, ele é válido por alguns minutos, não esqueça de verificar sua caixa de spam";
+		return email;
 
 	}
 }
