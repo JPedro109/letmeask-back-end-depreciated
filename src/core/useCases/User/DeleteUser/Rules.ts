@@ -21,6 +21,6 @@ export class Rules {
 
 		await this.repository.destroy(userId);
 
-		return "Usuário excluído com sucesso";
+		return userId;
 	}
 }
