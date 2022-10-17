@@ -19,6 +19,6 @@ export class Rules {
 
 		await this.repository.verifyEmail(email);
 
-		return "Email verificado com sucesso";
+		return email;
 	}
 }
