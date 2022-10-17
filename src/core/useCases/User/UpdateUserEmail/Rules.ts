@@ -21,6 +21,6 @@ export class Rules {
 
 		await this.repository.updateVerificationTokenExpiryDateById(userId, 0);
 
-		return "Email atualizado com sucesso";
+		return email;
 	}
 }
