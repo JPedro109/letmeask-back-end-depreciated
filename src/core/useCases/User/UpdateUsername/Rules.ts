@@ -14,6 +14,6 @@ export class Rules {
 
 		toolkit.cache.set(`username-${userId}`, name);
 
-		return "Nome atualizado com sucesso";
+		return name;
 	}
 }
