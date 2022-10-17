@@ -34,6 +34,6 @@ export class Rules {
 			token: token
 		});
 
-		return "Usuário cadastrado com sucesso, verique seu email, não esqueça de verificar sua caixa de spam";
+		return email;
 	}
 }
