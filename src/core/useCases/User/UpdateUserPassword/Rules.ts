@@ -30,6 +30,6 @@ export class Rules {
 
 		await this.repository.updatePasswordById(userId, hashPassword);
 
-		return "Senha atualizada com sucesso";
+		return userId;
 	}
 }
