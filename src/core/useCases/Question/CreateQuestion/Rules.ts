@@ -25,6 +25,6 @@ export class Rules {
 			question
 		);
 
-		return "Pergunta criada com sucesso";
+		return question;
 	}
 }
