@@ -13,6 +13,6 @@ export class Rules {
 		if (roomCode !== roomCodeUser) throw new UnauthorizedError("Só o adminstrador da sala pode fazer essa ação");
 
 		await this.repository.destroy(roomCode);
-		return "Sala excluída com sucesso";
+		return roomCode;
 	}
 }
