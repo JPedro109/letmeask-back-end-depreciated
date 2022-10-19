@@ -21,6 +21,6 @@ export class Rules {
 			response,
 		);
 
-		return "Resposta enviada com sucesso";
+		return response;
 	}
 }
