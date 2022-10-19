@@ -17,12 +17,12 @@ export class Rules {
 
 		if (question?.user_id !== userId) {
 			await this.questionRepository.destroy(questionId);
-			return "Questão excluída com sucesso";
+			return questionId;
 		}
 
 		if (question?.room_code !== roomCodeUser) {
 			await this.questionRepository.destroy(questionId);
-			return "Questão excluída com sucesso";
+			return questionId;
 		}
 
 		throw new UnauthorizedError("Só o adminstrador da sala e o criador da questão podem apaga-lá");
