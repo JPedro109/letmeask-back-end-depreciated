@@ -1,4 +1,4 @@
-import { MissingParamError, UnauthorizedError } from "../../../../utils/error";
+import { InvalidParamError, MissingParamError } from "../../../../utils/error";
 import { IUserRepository } from "../../../../data/repositories/UserRepository/IUserRepository";
 import { toolkit } from "../../../../utils/toolkit";
 import { DTO } from "./DTO";
@@ -15,7 +15,7 @@ export class Rules {
 
 		const comparePassword = toolkit.password.comparePasswordEncrypt(password, userPassword);
 
-		if (!comparePassword) throw new UnauthorizedError("Senha incorreta");
+		if (!comparePassword) throw new InvalidParamError("Senha incorreta");
 
 		toolkit.cache.del(`username-${userId}`);
 
