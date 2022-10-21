@@ -4,10 +4,10 @@ import { IQuestionRepository } from "./IQuestionRepository";
 
 export class QuestionRepository implements IQuestionRepository {
 
-	constructor(private adapter: IDBAdapter<Question>) { }
+	constructor(private adapter: IDBAdapter) { }
 
 	async store(id: string, userId: string, roomCode: string, question: string): Promise<void> {
-		await this.adapter.insert({
+		await this.adapter.setEntity("question").insert<Question>({
 			id,
 			user_id: userId,
 			room_code: roomCode,
@@ -16,14 +16,14 @@ export class QuestionRepository implements IQuestionRepository {
 	}
 
 	async getQuestions(roomCode: string): Promise<Question[]> {
-		return await this.adapter.getAll({ room_code: roomCode });
+		return await this.adapter.setEntity("question").getAll<Question>({ room_code: roomCode });
 	}
 
 	async getUserQuestions(userId: string): Promise<Question[]> {
-		return await this.adapter.getAll({ user_id: userId });
+		return await this.adapter.setEntity("question").getAll<Question>({ user_id: userId });
 	}
 
 	async destroy(questionId: string): Promise<void> {
-		await this.adapter.delete({ id: questionId });
+		await this.adapter.setEntity("question").delete<Question>({ id: questionId });
 	}
 }

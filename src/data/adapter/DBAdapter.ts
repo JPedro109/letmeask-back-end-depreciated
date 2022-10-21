@@ -1,21 +1,40 @@
 import { PrismaClient } from "@prisma/client";
 import { IDBAdapter } from "./IDBAdapter";
 
-export class DBAdapter<Type> implements IDBAdapter<Type> {
-
+export class DBAdapter implements IDBAdapter {
+    
 	prisma: PrismaClient;
 	table: string;
 
-	constructor(table: string) {
+	constructor() {
 		this.prisma = new PrismaClient();
-		this.table = table;
 	}
 
-	async insert(data: Type): Promise<Type> {
+	private setEntityExists(table: string): void {
+		if(table) this.table = table;
+	}
+
+	setEntity(table: string): IDBAdapter {
+		this.table = table;
+		return this;
+	}
+
+	async connect(): Promise<void> {
+		await this.prisma.$connect();
+	}
+
+	async closeConnection(): Promise<void> {
+		await this.prisma.$disconnect();
+	}
+
+	async insert<Type>(data: Type, table?: string): Promise<Type> {
+		this.setEntityExists(table);
+
 		return await this.prisma[this.table].create({ data });
 	}
 
-	async getOne(where: object, operator?: "AND" | "OR"): Promise<Type> {
+	async getOne<Type>(where: object, operator?: "AND" | "OR", table?: string): Promise<Type> {
+		this.setEntityExists(table);
 
 		if (Object.keys(where).length > 1) {
 
@@ -58,7 +77,8 @@ export class DBAdapter<Type> implements IDBAdapter<Type> {
 		return object?.[0];
 	}
 
-	async getAll(where?: object, operator?: "AND" | "OR"): Promise<Type[]> {
+	async getAll<Type>(where?: object, operator?: "AND" | "OR", table?: string): Promise<Type[]> {
+		this.setEntityExists(table);
 
 		if (Object.keys(where).length > 1) {
 
@@ -102,15 +122,22 @@ export class DBAdapter<Type> implements IDBAdapter<Type> {
 
 	}
 
-	async update(where: object, data: object): Promise<Type> {
+	async update<Type>(where: object, data: object, table?: string): Promise<Type> {
+		this.setEntityExists(table);
+
 		return await this.prisma[this.table].update({ where, data });
 	}
 
-	async delete(where: object): Promise<Type> {
+	async delete<Type>(where: object, table?: string): Promise<Type> {
+		this.setEntityExists(table);
+
 		return await this.prisma[this.table].delete({ where });
 	}
 
-	async deleteMany(where?: object): Promise<Type> {
-		return await this.prisma[this.table].delete({ where: where || {} });
+	async deleteMany<Type>(table?: string): Promise<Type[]> {
+		this.setEntityExists(table);
+
+		await this.prisma[this.table].delete({});
+		return await this.getAll();
 	}
 }

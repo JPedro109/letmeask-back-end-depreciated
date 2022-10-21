@@ -1,8 +1,11 @@
-export interface IDBAdapter<Type> {
-	insert(data: Type): Promise<Type>;
-	getOne(where: object, operator?: "AND" | "OR"): Promise<Type>;
-	getAll(where?: object, operator?: "AND" | "OR"): Promise<Type[]>;
-	update(where: object, data: object): Promise<Type>;
-	delete(where: object): Promise<Type>;
-	deleteMany(where?: object): Promise<Type>;
+export interface IDBAdapter {
+	connect(): Promise<void>
+	closeConnection(): Promise<void>
+	setEntity(table: string): IDBAdapter;
+	insert<Type>(data: Type, table?: string): Promise<Type>;
+	getOne<Type>(where: object, operator?: "AND" | "OR", table?: string): Promise<Type>;
+	getAll<Type>(where?: object, operator?: "AND" | "OR", table?: string): Promise<Type[]>;
+	update<Type>(where: object, data: object, table?: string): Promise<Type>;
+	delete<Type>(where: object, table?: string): Promise<Type>;
+	deleteMany<Type>(table?: string): Promise<Type[]>;
 }

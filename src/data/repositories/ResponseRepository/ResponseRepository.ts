@@ -4,10 +4,10 @@ import { IResponseRepository } from "./IResponseRepository";
 
 export class ResponseRepository implements IResponseRepository {
 
-	constructor(private adapter: IDBAdapter<Response>) { }
+	constructor(private adapter: IDBAdapter) { }
 
 	async store(id: string, questionId: string, response: string): Promise<Response> {
-		return await this.adapter.insert({
+		return await this.adapter.setEntity("response").insert<Response>({
 			id,
 			question_id: questionId,
 			response
@@ -15,6 +15,6 @@ export class ResponseRepository implements IResponseRepository {
 	}
 
 	async getResponse(questionId: string): Promise<Response> {
-		return await this.adapter.getOne({ question_id: questionId });
+		return await this.adapter.setEntity("response").getOne<Response>({ question_id: questionId });
 	}
 }

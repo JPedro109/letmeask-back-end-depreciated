@@ -1,6 +1,4 @@
-import { User } from "../../models/User";
-import { DBAdapter } from "../../adapter/DBAdapter";
+import { dbAdapter } from "../../adapter";
 import { UserRepository } from "./UserRepository";
 
-const adapter = new DBAdapter<User>("user");
-export const userRepository = new UserRepository(adapter);
+export const userRepository = new UserRepository(dbAdapter);
