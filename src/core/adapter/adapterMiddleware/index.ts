@@ -17,9 +17,10 @@ export const adapterMiddleware = (middleware: (request: IRequestMiddleware) => P
 		} catch (e) {
 			const message = e?.message;
 			const statusCode = e?.statusCode || 500;
+			const code = e?.name;
 
 			console.error(message);
-			return res.status(statusCode).json({ message: statusCode !== 500 ? message : "Internal Server Error" });
+			return res.status(statusCode).json({ message: statusCode !== 500 ? message : "Internal Server Error", code });
 		}
 	};
 };
