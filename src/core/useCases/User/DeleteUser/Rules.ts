@@ -11,6 +11,8 @@ export class Rules {
 
 		if (!password || !passwordConfirm) throw new MissingParamError("Preencha todos os campos");
 
+		if (password !== passwordConfirm) throw new InvalidParamError("As senhas não coincidem");
+
 		const userPassword = await this.repository.getPasswordById(userId);
 
 		const comparePassword = toolkit.password.comparePasswordEncrypt(password, userPassword);
