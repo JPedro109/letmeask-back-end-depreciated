@@ -41,7 +41,7 @@ export class UserRepository implements IUserRepository {
 	}
 
 	async findEmailByEmail(email: string): Promise<string> {
-		const data = await this.adapter.setEntity("user").getOne<User>({ email, verified_email: true }, "AND");
+		const data = await this.adapter.setEntity("user").getOne<User>({ email }, "AND");
 
 		return data?.email;
 	}
