@@ -36,7 +36,7 @@ export class DBAdapter implements IDBAdapter {
 	async getOne<Type>(where: object, operator?: "AND" | "OR", table?: string): Promise<Type> {
 		this.setEntityExists(table);
 
-		if (Object.keys(where).length > 1) {
+		if (where && Object.keys(where).length > 1) {
 
 			if (!operator) throw new Error("Você precisa colocar o operador da operação");
 
@@ -80,7 +80,7 @@ export class DBAdapter implements IDBAdapter {
 	async getAll<Type>(where?: object, operator?: "AND" | "OR", table?: string): Promise<Type[]> {
 		this.setEntityExists(table);
 
-		if (Object.keys(where).length > 1) {
+		if (where && Object.keys(where).length > 1) {
 
 			if (!operator) throw new Error("Você precisa colocar o operador da operação");
 
@@ -137,7 +137,7 @@ export class DBAdapter implements IDBAdapter {
 	async deleteMany<Type>(table?: string): Promise<Type[]> {
 		this.setEntityExists(table);
 
-		await this.prisma[this.table].delete({});
+		await this.prisma[this.table].deleteMany({});
 		return await this.getAll();
 	}
 }
