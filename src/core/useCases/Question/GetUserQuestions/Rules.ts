@@ -6,7 +6,7 @@ export class Rules {
 
 	constructor(private questionRepository: IQuestionRepository, private responseRepository: IResponseRepository) { }
 
-	async execute({ userId }: DTO) {
+	async execute({ userId }: DTO): Promise<{ id: string; userId: string; question: string; response?: string; }[]> {
 		const questions = await this.questionRepository.getUserQuestions(userId);
 		const questionsFormated = [];
 
