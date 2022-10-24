@@ -6,7 +6,7 @@ export class Rules {
 
 	constructor(private questionRepository: IQuestionRepository, private responseRepository: IResponseRepository) { }
 
-	async execute({ roomCode }: DTO) {
+	async execute({ roomCode }: DTO): Promise<{ id: string; userId: string; question: string; response?: string; }[]> {
 		const questions = await this.questionRepository.getQuestions(roomCode);
 		const questionsFormated = [];
 
