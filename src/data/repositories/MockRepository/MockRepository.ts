@@ -2,7 +2,6 @@ import { IDBAdapter } from "../../adapter/IDBAdapter";
 import { User } from "../../models/User";
 import { Room } from "../../models/Room";
 import { Question } from "../../models/Question";
-import { Response } from "../../models/Response";
 
 export class MockRepository {
 
@@ -52,17 +51,10 @@ export class MockRepository {
 			id: "1",
 			question: "Question?",
 			room_code: "1",
-			user_id: "2",
+			user_id: "3",
 			created_at: new Date(),
 			updated_at: new Date(),
 		}, "question");
-
-		await this.database.insert<Response>({
-			id: "1",
-			question_id: "1",
-			response: "Response",
-			created_at: new Date(),
-		}, "response");
 	}
 
 	async delete(){
