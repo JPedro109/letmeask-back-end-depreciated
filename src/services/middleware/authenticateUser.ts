@@ -1,3 +1,4 @@
+import { JsonWebTokenModel } from "../../utils/model";
 import { IRequestMiddleware } from "../../core/adapter/interfaces/IRequestMiddleware";
 import { UnauthorizedError } from "../../utils/error";
 import { toolkit } from "../../utils/toolkit";
@@ -10,8 +11,7 @@ export const authenticateUser = async (request: IRequestMiddleware) => {
 
 	const [, token] = authorization.split(" ");
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const decode: any = toolkit.jsonWebToken.tokenVerification(token);
+	const decode: JsonWebTokenModel = toolkit.jsonWebToken.tokenVerification(token);
 
-	return decode.id;
+	return decode.id as string;
 };
