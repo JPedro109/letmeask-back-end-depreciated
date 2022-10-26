@@ -1,3 +1,4 @@
+import { JsonWebTokenModel } from "../../../../utils/model";
 import { MissingParamError } from "../../../../utils/error";
 import { IUserRepository } from "../../../../data/repositories/UserRepository/IUserRepository";
 import { toolkit } from "../../../../utils/toolkit";
@@ -10,10 +11,9 @@ export class Rules {
 	async execute({ refreshToken }: DTO) {
 		if (!refreshToken) throw new MissingParamError("O refresh token precisa ser enviado");
 
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-		const decode: any = toolkit.jsonWebToken.tokenVerification(refreshToken);
+		const decode: JsonWebTokenModel = toolkit.jsonWebToken.tokenVerification(refreshToken);
 
-		const email = decode?.email;
+		const email = decode.email as string;
 
 		const id = await this.repository.getId(email);
 
