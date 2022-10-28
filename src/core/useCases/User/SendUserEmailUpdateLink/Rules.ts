@@ -16,7 +16,7 @@ export class Rules {
 		if (emailIsRegistered) throw new InvalidParamError("Email já cadastrado");
 
 		const token = toolkit.generation.token();
-		const tokenExpirationTime = toolkit.generation.tokenExpirationTime(parseInt(TOKEN_EXPIRY_TIME));
+		const tokenExpirationTime = toolkit.generation.tokenExpirationTime(TOKEN_EXPIRY_TIME);
 
 		await this.repository.updateVerificationTokenById(userId, token);
 		await this.repository.updateVerificationTokenExpiryDateById(userId, tokenExpirationTime);
