@@ -1,13 +1,13 @@
 import { setup } from "../setup";
 import { Rules as GetQuestion } from "../../../core/useCases/Question/GetQuestions/Rules";
-import { questionRepositoryInMemory, responseRepositoryInMemory } from "../Mock";
+import { questionRepositoryInMemory, responseRepositoryInMemory, userRepositoryInMemory } from "../Mock";
 
 describe("Unit Test - Get Questions", () => {
 
 	setup();
 
 	test("Should get questions", async () => {
-		const getQuestion = new GetQuestion(questionRepositoryInMemory, responseRepositoryInMemory);
+		const getQuestion = new GetQuestion(userRepositoryInMemory, questionRepositoryInMemory, responseRepositoryInMemory);
 
 		const question = {
 			roomCode: "1"
