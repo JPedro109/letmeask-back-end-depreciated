@@ -6,13 +6,17 @@ export class QuestionRepository implements IQuestionRepository {
 
 	constructor(private adapter: IDBAdapter) { }
 
-	async store(id: string, userId: string, roomCode: string, question: string): Promise<void> {
-		await this.adapter.setEntity("question").insert<Question>({
+	async store(id: string, userId: string, roomCode: string, question: string): Promise<Question> {
+		return await this.adapter.setEntity("question").insert<Question>({
 			id,
 			user_id: userId,
 			room_code: roomCode,
 			question
 		});
+	}
+
+	async getQuestion(id: string): Promise<Question> {
+		return await this.adapter.setEntity("question").getOne<Question>({ id });
 	}
 
 	async getQuestions(roomCode: string): Promise<Question[]> {
