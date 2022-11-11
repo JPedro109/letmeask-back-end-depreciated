@@ -1,0 +1,1 @@
+export type Questions = Array<{ id: string; userId: string; question: string; response?: string; }>;
