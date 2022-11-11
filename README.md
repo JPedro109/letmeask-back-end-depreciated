@@ -4,7 +4,7 @@
 <p>🚀 Aplicação voltada interação de usuários por meio de salas de perguntas e respostas</p>
 
 # Status da Aplicação
-<p>🚧 Aplicação Em Desevolvimento</p>
+<p>🔥 Aplicação Finalizada</p>
 
 # Features
 - Cadastro de Usuário
@@ -36,8 +36,9 @@ Se quiser usar o projeto sem volumes, você não precisa ter instalado o node e 
 ```sh
  docker-compose up -d
 ```
+# Teste
 
-Após subir os contêineres usando volumes ou não, rode o seguinte comando para executar as migrations:
+Para executar os testes, rode o seguinte comando:
 ```sh
-docker exec -i api-letmeask yarn prisma migrate deploy
+docker exec -i api-letmeask yarn test
 ```
