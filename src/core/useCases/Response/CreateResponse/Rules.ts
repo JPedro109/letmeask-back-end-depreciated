@@ -2,6 +2,7 @@ import { IResponseRepository } from "../../../../data/repositories/ResponseRepos
 import { IRoomRepository } from "../../../../data/repositories/RoomRepository/IRoomRepository";
 import { MissingParamError, UnauthorizedError } from "../../../../utils/error";
 import { DTO } from "./DTO";
+import { toolkit } from "../../../../utils/toolkit";
 
 export class Rules {
 
@@ -15,8 +16,10 @@ export class Rules {
 
 		if (roomCode !== roomCodeUser) throw new UnauthorizedError("Só o adminstrador da sala pode responder perguntas");
 
+		const id = toolkit.generation.id();
+
 		await this.responseRepository.store(
-			userId,
+			id,
 			questionId,
 			response,
 		);
