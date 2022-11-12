@@ -1,7 +1,7 @@
 import { setup } from "../setup";
 import { Rules as DeleteQuestion } from "../../../core/useCases/Question/DeleteQuestion/Rules";
-import { questionRepository } from "../../../data/repositories/QuestionRepository";
 import { roomRepository } from "../../../data/repositories/RoomRepository";
+import { questionRepository } from "../../../data/repositories/QuestionRepository";
 
 describe("Integration Test - Delete Question", () => {
 

@@ -1,13 +1,13 @@
 import { setup } from "../setup";
 import { Rules as GetUserQuestions } from "../../../core/useCases/Question/GetUserQuestions/Rules";
-import { userRepositoryInMemory, questionRepositoryInMemory, responseRepositoryInMemory } from "../Mock";
+import { questionRepositoryInMemory, responseRepositoryInMemory } from "../Mock";
 
 describe("Unit Test - Get User Questions", () => {
 
 	setup();
 
 	test("Should get user questions", async () => {
-		const getUserQuestion = new GetUserQuestions(userRepositoryInMemory, questionRepositoryInMemory, responseRepositoryInMemory);
+		const getUserQuestion = new GetUserQuestions(questionRepositoryInMemory, responseRepositoryInMemory);
 
 		const question = {
 			userId: "3"

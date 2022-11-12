@@ -1,6 +1,5 @@
 import { setup } from "../setup";
 import { Rules as GetQuestion } from "../../../core/useCases/Question/GetQuestions/Rules";
-import { userRepository } from "../../../data/repositories/UserRepository";
 import { questionRepository } from "../../../data/repositories/QuestionRepository";
 import { responseRepository } from "../../../data/repositories/ResponseRepository";
 
@@ -9,7 +8,7 @@ describe("Integration Test - Get Questions", () => {
 	setup();
 
 	test("Should get questions", async () => {
-		const getQuestion = new GetQuestion(userRepository, questionRepository, responseRepository);
+		const getQuestion = new GetQuestion(questionRepository, responseRepository);
 
 		const question = {
 			roomCode: "1"

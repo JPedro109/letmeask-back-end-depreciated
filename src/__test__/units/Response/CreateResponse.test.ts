@@ -1,6 +1,6 @@
 import { setup } from "../setup";
 import { Rules as CreateResponse } from "../../../core/useCases/Response/CreateResponse/Rules";
-import { responseRepositoryInMemory, roomRepositoryInMemory } from "../Mock";
+import { questionRepositoryInMemory, responseRepositoryInMemory, roomRepositoryInMemory } from "../Mock";
 import { MissingParamError, UnauthorizedError } from "../../../utils/error";
 
 describe("Unit Test - Create Response", () => {
@@ -8,7 +8,7 @@ describe("Unit Test - Create Response", () => {
 	setup();
 
 	test("Should not create response, because the user is not room admin", async () => {
-		const createResponse = new CreateResponse(responseRepositoryInMemory, roomRepositoryInMemory);
+		const createResponse = new CreateResponse(responseRepositoryInMemory, questionRepositoryInMemory, roomRepositoryInMemory);
 
 		const responseBody = {
 			roomCode: "1",
@@ -23,7 +23,7 @@ describe("Unit Test - Create Response", () => {
 	});
 
 	test("Should not create response, because response field is empty", async () => {
-		const createResponse = new CreateResponse(responseRepositoryInMemory, roomRepositoryInMemory);
+		const createResponse = new CreateResponse(responseRepositoryInMemory, questionRepositoryInMemory, roomRepositoryInMemory);
 
 		const responseBody = {
 			roomCode: "1",
@@ -38,7 +38,7 @@ describe("Unit Test - Create Response", () => {
 	});
 
 	test("Should create the response", async () => {
-		const createResponse = new CreateResponse(responseRepositoryInMemory, roomRepositoryInMemory);
+		const createResponse = new CreateResponse(responseRepositoryInMemory, questionRepositoryInMemory, roomRepositoryInMemory);
 
 		const responseBody = {
 			roomCode: "1",

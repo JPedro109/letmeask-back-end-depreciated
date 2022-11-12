@@ -1,7 +1,8 @@
 import { setup } from "../setup";
 import { Rules as CreateResponse } from "../../../core/useCases/Response/CreateResponse/Rules";
-import { responseRepository } from "../../../data/repositories/ResponseRepository";
 import { roomRepository } from "../../../data/repositories/RoomRepository";
+import { questionRepository } from "../../../data/repositories/QuestionRepository";
+import { responseRepository } from "../../../data/repositories/ResponseRepository";
 import { MissingParamError, UnauthorizedError } from "../../../utils/error";
 
 describe("Integration Test - Create Response", () => {
@@ -9,7 +10,7 @@ describe("Integration Test - Create Response", () => {
 	setup();
 
 	test("Should not create response, because the user is not room admin", async () => {
-		const createResponse = new CreateResponse(responseRepository, roomRepository);
+		const createResponse = new CreateResponse(responseRepository, questionRepository, roomRepository);
 
 		const responseBody = {
 			roomCode: "1",
@@ -24,7 +25,7 @@ describe("Integration Test - Create Response", () => {
 	});
 
 	test("Should not create response, because response field is empty", async () => {
-		const createResponse = new CreateResponse(responseRepository, roomRepository);
+		const createResponse = new CreateResponse(responseRepository, questionRepository, roomRepository);
 
 		const responseBody = {
 			roomCode: "1",
@@ -39,7 +40,7 @@ describe("Integration Test - Create Response", () => {
 	});
 
 	test("Should create the response", async () => {
-		const createResponse = new CreateResponse(responseRepository, roomRepository);
+		const createResponse = new CreateResponse(responseRepository, questionRepository, roomRepository);
 
 		const responseBody = {
 			roomCode: "1",

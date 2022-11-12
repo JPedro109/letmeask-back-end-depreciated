@@ -1,12 +1,66 @@
+import { Question } from "../../../../data/models/Question";
 import { IQuestionRepository } from "../../../../data/repositories/QuestionRepository/IQuestionRepository";
 import { IRoomRepository } from "../../../../data/repositories/RoomRepository/IRoomRepository";
 import { MissingParamError, UnauthorizedError } from "../../../../utils/error";
 import { toolkit } from "../../../../utils/toolkit";
+import { Questions } from "../../../types";
 import { DTO } from "./DTO";
 
 export class Rules {
 
 	constructor(private questionRepository: IQuestionRepository, private roomRepository: IRoomRepository) { }
+
+	private addCache(roomCode: string, userId: string, questionObject: Question): void {
+		const { id, question } = questionObject;
+
+		const roomQuestions = toolkit.cache.get<Questions>(roomCode);  
+
+		if(!roomQuestions) {
+			const initRoomQuestions: Questions = [];
+
+			initRoomQuestions.push({
+				id,
+				userId,
+				question,
+				response: null
+			});
+
+			toolkit.cache.set<Questions>(roomCode, initRoomQuestions);
+		} else {
+			roomQuestions.push({
+				id,
+				userId,
+				question,
+				response: null
+			});
+			toolkit.cache.del(roomCode);
+			toolkit.cache.set<Questions>(roomCode, roomQuestions);
+		}
+
+		const userQuestions = toolkit.cache.get<Questions>(userId);  
+
+		if(!userQuestions) {
+			const initUserQuestions: Questions = [];
+
+			initUserQuestions.push({
+				id,
+				userId,
+				question,
+				response: null
+			});
+
+			toolkit.cache.set<Questions>(userId, initUserQuestions);
+		} else {
+			userQuestions.push({
+				id,
+				userId,
+				question,
+				response: null
+			});
+			toolkit.cache.del(userId);
+			toolkit.cache.set<Questions>(userId, userQuestions);
+		}
+	}
 
 	async execute({ question, userId, roomCode }: DTO) {
 
@@ -18,12 +72,14 @@ export class Rules {
 
 		const id = toolkit.generation.id();
 
-		await this.questionRepository.store(
+		const questionCreated = await this.questionRepository.store(
 			id,
 			userId,
 			roomCode,
 			question
 		);
+
+		this.addCache(roomCode, userId, questionCreated);
 
 		return question;
 	}
