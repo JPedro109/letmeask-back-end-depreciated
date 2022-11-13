@@ -38,13 +38,13 @@ export class Rules {
 
 		const question = await this.questionRepository.getQuestion(questionId);
 
-		if (question.user_id !== userId) {
+		if (question.user_id === userId) {
 			await this.questionRepository.destroy(questionId);
 			this.removeCache(question.room_code, question.user_id, question.id);
 			return questionId;
 		}
 
-		if (question.room_code !== roomCodeUser) {
+		if (question.room_code === roomCodeUser) {
 			await this.questionRepository.destroy(questionId);
 			this.removeCache(question.room_code, question.user_id, question.id);
 			return questionId;
