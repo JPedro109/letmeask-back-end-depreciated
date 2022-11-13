@@ -2,13 +2,14 @@
 	"name": "letmeask-backend",
 	"version": "1.0.0",
 	"description": "Api do letmeask",
-	"main": "dist/server.js",
+	"main": "dist/src/server.js",
 	"repository": "https://github.com/JPedro109/letmeask-back-end",
 	"author": "João Pedro",
 	"license": "MIT",
 	"scripts": {
 		"test": "jest --detectOpenHandles --silent",
-		"dev": "ts-node-dev --files src/server.ts"
+		"dev": "ts-node-dev --files src/server.ts",
+		"start": "tsc && node dist/src/server.js"
 	},
 	"devDependencies": {
 		"@types/cors": "^2.8.12",
