@@ -1,3 +1,3 @@
-import toolkit from "@jpmnsdeveloper/toolkit";
+import tkt from "@jpmnsdeveloper/toolkit";
 
-export { toolkit };
+export const toolkit = tkt;
