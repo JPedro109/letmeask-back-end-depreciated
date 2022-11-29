@@ -7,4 +7,5 @@ export const {
 	InvalidParamError,
 	EmailInvalidError,
 	PasswordInvalidError,
+	NotFoundError
 } = toolkit.error;
