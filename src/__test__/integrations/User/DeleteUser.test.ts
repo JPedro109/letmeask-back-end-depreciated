@@ -1,6 +1,6 @@
 import { setup } from "../setup";
 import { Rules as DeleteUser } from "../../../core/useCases/User/DeleteUser/Rules";
-import { InvalidParamError, MissingParamError } from "../../../utils/error";
+import { InvalidParamError, MissingParamError, NotFoundError } from "../../../utils/error";
 import { userRepository } from "../../../data/repositories/UserRepository";
 
 describe("Integration Test - Delete User", () => {
@@ -69,6 +69,19 @@ describe("Integration Test - Delete User", () => {
 		};
 		await deleteUserRules.execute(user).catch(e => {
 			expect(e).toBeInstanceOf(InvalidParamError);
+		});
+	});
+
+	test("Should not delete user, because user is not exists", async () => {
+		const deleteUserRules = new DeleteUser(userRepository);
+
+		const user = {
+			userId: "6",
+			password: "Password123456",
+			passwordConfirm: "Password123456",
+		};
+		await deleteUserRules.execute(user).catch(e => {
+			expect(e).toBeInstanceOf(NotFoundError);
 		});
 	});
 

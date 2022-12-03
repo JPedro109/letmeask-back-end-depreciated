@@ -1,4 +1,4 @@
-import { InvalidParamError, MissingParamError } from "../../../../utils/error";
+import { InvalidParamError, MissingParamError, NotFoundError } from "../../../../utils/error";
 import { IUserRepository } from "../../../../data/repositories/UserRepository/IUserRepository";
 import { toolkit } from "../../../../utils/toolkit";
 import { DTO } from "./DTO";
@@ -14,6 +14,8 @@ export class Rules {
 		if (password !== passwordConfirm) throw new InvalidParamError("As senhas não coincidem");
 
 		const userPassword = await this.repository.getPasswordById(userId);
+
+		if(!userPassword) throw new NotFoundError("Esse usuário não existe");
 
 		const comparePassword = toolkit.password.comparePasswordEncrypt(password, userPassword);
 
