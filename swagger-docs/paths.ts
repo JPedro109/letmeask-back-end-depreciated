@@ -194,7 +194,7 @@ export const paths = {
 			responses: {
 				
 				200: {
-					description: "Sucesso na autentificação do usuário",
+					description: "Sucesso no envio do link",
 					schema: responseSchema
 				},
 	
@@ -254,7 +254,7 @@ export const paths = {
 			responses: {
 				
 				200: {
-					description: "Sucesso na confirmação do e-mail",
+					description: "Sucesso na recuperação da senha",
 					schema: responseSchema
 				},
 	
@@ -296,7 +296,7 @@ export const paths = {
 			responses: {
 				
 				200: {
-					description: "Sucesso no token de confirmação de atualização de e-mail",
+					description: "Sucesso no envio do link",
 					schema: responseSchema
 				},
 	
@@ -316,7 +316,7 @@ export const paths = {
 	"/update-email": {
 		patch: {
 			tags: [ "Usuário" ],
-			summary: "Faz a confirmação a atualização do e-mail",
+			summary: "Faz a confirmação da atualização do e-mail",
 			parameters: [
 				{
 					in: "header",
@@ -341,7 +341,7 @@ export const paths = {
 			responses: {
 				
 				200: {
-					description: "Sucesso no confirmação da atualização do e-mail",
+					description: "Sucesso na confirmação da atualização do e-mail",
 					schema: responseSchema
 				},
 	
@@ -401,7 +401,7 @@ export const paths = {
 				},
 	
 				400: {
-					description: "Erro ocasiona pelo usuário",
+					description: "Erro do usuário",
 					schema: errorSchema
 				},
 	
@@ -448,12 +448,12 @@ export const paths = {
 			responses: {
 				
 				200: {
-					description: "Sucesso na atualização da senha do usuário",
+					description: "Sucesso na atualização do nome",
 					schema: responseSchema
 				},
 	
 				400: {
-					description: "Erro ocasiona pelo usuário",
+					description: "Erro do usuário",
 					schema: errorSchema
 				},
 	
@@ -487,7 +487,7 @@ export const paths = {
 			responses: {
 				
 				200: {
-					description: "Sucesso no retorno do usuário",
+					description: "Sucesso no retorno do nome usuário",
 					schema: responseSchema
 				},
 	
@@ -538,7 +538,7 @@ export const paths = {
 			responses: {
 				
 				200: {
-					description: "Sucesso na exclusão do senha do usuário",
+					description: "Sucesso na exclusão do usuário",
 					schema: responseSchema
 				},
 	
